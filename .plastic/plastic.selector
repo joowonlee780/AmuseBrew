@@ -1,0 +1,3 @@
+rep "22CapStone@day010@cloud"
+  path "/"
+    smartbranch "/main"

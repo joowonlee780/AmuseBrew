@@ -148,14 +148,14 @@ public class GunController : MonoBehaviour
         
         while (z < 0.25)
         {
-            currentGun.transform.Rotate(new Vector3(0, 0, 2));
+            currentGun.transform.Rotate(new Vector3(0, 0, 2 * Time.deltaTime)); // << Tiime.deltaTime
             z = z + 0.0166;
             yield return null;
         }
 
         while (z < 0.5)
         {
-            currentGun.transform.Rotate(new Vector3(0, 0, -2));
+            currentGun.transform.Rotate(new Vector3(0, 0, -2 * Time.deltaTime)); // << Time.deltaTime
             z = z + 0.0166;
             yield return null;
         }

@@ -119,6 +119,11 @@ public class ActionController : MonoBehaviour
             pistol.SetActive(false);
             hud.SetActive(false);
             gunController.enabled = false;
+            if(ps != null)
+            {
+                ps.clueCnt = 0;
+                ps.TrueEndOn = false;
+            }
         }
     }
     private void TryAction() // 물건 가져오기 실행

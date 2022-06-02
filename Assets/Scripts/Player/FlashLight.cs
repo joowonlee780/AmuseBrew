@@ -17,7 +17,7 @@ public class FlashLight : MonoBehaviour
     public float battery_limit;
 
     private PlayerScemeManage playerSceneManger;
-
+    private Playercontroller2_donghee playerController;
     private void Awake()
     {
         playerSceneManger = FindObjectOfType<PlayerScemeManage>();
@@ -25,6 +25,7 @@ public class FlashLight : MonoBehaviour
 
     void Start()
     {
+        playerController = FindObjectOfType<Playercontroller2_donghee>();
         playerAudioSources = GetComponents<AudioSource>();
         playerAudioSources[1].clip = FlashlightToggleSound;
         _light.intensity = 0.0f;
@@ -40,6 +41,7 @@ public class FlashLight : MonoBehaviour
 
     void Update()
     {
+        if (playerController != null && playerController.isDead) return;
         if (battery_limit <= 0f)
         {
             FlashLightLight.gameObject.SetActive(false);

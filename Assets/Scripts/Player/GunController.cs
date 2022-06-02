@@ -30,12 +30,14 @@ public class GunController : MonoBehaviour
     private Vector3 originRotation;
 
     public bool isShakeOn; // 카메라 흔들림 연출 확인용 변수
+    private Playercontroller2_donghee playerController;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         Reload_audioSource = GetComponent<AudioSource>();
         theCrossshair = FindObjectOfType<CrossHair>();
+        playerController = FindObjectOfType<Playercontroller2_donghee>();
     }
 
     // Update is called once per frame
@@ -43,6 +45,7 @@ public class GunController : MonoBehaviour
     {
         if (PauseMenu.GameisPause) return;
         if (isShakeOn) return; // 카메라가 흔들리고 있으면 잠시 움직임 제어 멈춤
+        if (playerController.isDead) return;
         GunFireRateCalc();
         TryFire();
         TryReload();
@@ -148,15 +151,17 @@ public class GunController : MonoBehaviour
         
         while (z < 0.25)
         {
-            currentGun.transform.Rotate(new Vector3(0, 0, 2 * Time.deltaTime)); // << Tiime.deltaTime
-            z = z + 0.0166;
+            currentGun.transform.Rotate(new Vector3(0, 0, 2));
+            //z = z + 0.0166;
+            z = z + Time.deltaTime;
             yield return null;
         }
 
         while (z < 0.5)
         {
-            currentGun.transform.Rotate(new Vector3(0, 0, -2 * Time.deltaTime)); // << Time.deltaTime
-            z = z + 0.0166;
+            currentGun.transform.Rotate(new Vector3(0, 0, -2));
+            //z = z + 0.0166;
+            z = z + Time.deltaTime;
             yield return null;
         }
         currentGun.transform.localEulerAngles = new Vector3(current.x, current.y, 0);
